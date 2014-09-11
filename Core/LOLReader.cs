@@ -74,6 +74,7 @@ namespace League_Of_Legends.Core
 	                string[] allText = File.ReadAllLines(SystemPath + filesystemName);
 	                defaultLocale = ScanLocale(allText);
 	            } catch (FileNotFoundException e) {
+					System.Windows.Forms.MessageBox.Show("Ошибка чтения файла, возможно он открыт в другой программе. Error: "+e.Message);
 	            } 
 			}else{
 				System.Windows.Forms.MessageBox.Show("Файл локализации не найден");
@@ -83,6 +84,7 @@ namespace League_Of_Legends.Core
 	                string[] allText = File.ReadAllLines(SystemPath + fileLocalName);
 	                defaultLanguage = ScanLanguage(allText);
 	            } catch (FileNotFoundException e) {
+					System.Windows.Forms.MessageBox.Show("Ошибка чтения файла, возможно он открыт в другой программе. Error: "+e.Message);
 	            } 
 			}else{
 				System.Windows.Forms.MessageBox.Show("Файл языка не найден");

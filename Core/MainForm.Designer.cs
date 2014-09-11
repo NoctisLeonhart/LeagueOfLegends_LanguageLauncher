@@ -130,7 +130,7 @@ namespace League_Of_Legends
 			this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
 			this.notifyIcon1.Text = "League Of Legends";
 			this.notifyIcon1.Visible = true;
-			this.notifyIcon1.Click += new System.EventHandler(this.NotifyIcon1Click);
+			this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseClick);
 			// 
 			// contextMenu1
 			// 

@@ -84,9 +84,9 @@ namespace League_Of_Legends
 			System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\lol.launcher.exe");
 		}
 						
-		private void NotifyIcon1Click(object sender, EventArgs e)
+		private void NotifyIcon1_MouseClick(Object sender, MouseEventArgs e)
 		{
-			if (this.WindowState == FormWindowState.Minimized)
+			if (this.WindowState == FormWindowState.Minimized && e.Button == MouseButtons.Left)
 		    { 
 		       this.WindowState = FormWindowState.Normal; 
 		       this.ShowInTaskbar = true; 
@@ -111,7 +111,12 @@ namespace League_Of_Legends
 		}
 		
 		private void menuItemOpen_Click(object sender, EventArgs e){
-			
+			if (this.WindowState == FormWindowState.Minimized)
+		    { 
+		       this.WindowState = FormWindowState.Normal; 
+		       this.ShowInTaskbar = true; 
+		       notifyIcon1.Visible = false; 
+		    } 
 		}
 	}
 }
