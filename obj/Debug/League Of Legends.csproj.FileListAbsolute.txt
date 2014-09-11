@@ -1,0 +1,7 @@
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\bin\Debug\League Of Legends.exe
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\bin\Debug\League Of Legends.pdb
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\obj\Debug\League Of Legends.csprojResolveAssemblyReference.cache
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\obj\Debug\League Of Legends.exe
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\obj\Debug\League Of Legends.pdb
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\obj\Debug\League_Of_Legends.MainForm.resources
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\obj\Debug\League Of Legends.csproj.GenerateResource.Cache

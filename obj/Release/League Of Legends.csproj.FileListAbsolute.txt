@@ -1,0 +1,6 @@
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\obj\Release\League Of Legends.csprojResolveAssemblyReference.cache
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\obj\Release\League_Of_Legends.MainForm.resources
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\obj\Release\League Of Legends.csproj.GenerateResource.Cache
+D:\Projects\SharpDevelop Projects\League Of Legends\League Of Legends\obj\Release\League Of Legends.exe
+D:\League Of Legends.exe
+D:\MMORPG\LOL\League of Legends\League Of Legends.exe
