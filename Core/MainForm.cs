@@ -20,17 +20,38 @@ namespace League_Of_Legends
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		private static Timer LOLProcessTimer = new Timer();
 		private LOLReader lolreader = new LOLReader();
-		
+		private static ProcessChecker LOLProcess = new ProcessChecker();
+		private const string LOLProcessName = "LoLLauncher";
+				
 		public MainForm()
 		{
+			ThisProcessCheck();
 			InitializeComponent();
 			loadDefaultSettings();
 		}	
 		
+		private void ThisProcessCheck(){
+			if(LOLProcess.ThisProcessIsOpen()){
+				MessageBox.Show("League Of Legends Language Launcher уже запущен, проверьте трей");
+				LOLProcess.KillHimself();
+			}
+				
+		}
+		
 		private void loadDefaultSettings(){
 			this.RegionCB.Text = SelectDefaultRegion(lolreader.getDefaultLocale());
 			this.LanguageCB.Text = SelectDefaultLanguage(lolreader.getDefaultLanguage());
+			LOLProcessTimer.Tick += new EventHandler(TimerEventProcessor);
+			LOLProcessTimer.Interval = 500;
+		}
+		
+		private void TimerEventProcessor(Object myObject, EventArgs myEventArgs){
+			if(!LOLProcess.IsProcessOpen(LOLProcessName)){
+				ShowLauncher();
+				LOLProcessTimer.Stop();
+			}
 		}
 		
 		private string SelectDefaultRegion(string regionCode){
@@ -68,6 +89,8 @@ namespace League_Of_Legends
 			string returnString = "ru_ru";
 			if(LanguageName == "Русский")
 				returnString = "ru_ru";
+			else if(LanguageName == "Английский" && regionName == "Россия")
+				returnString = "en_us";
 			else if(LanguageName == "Английский" && regionName == "Западная Европа")
 				returnString = "en_gb";
 			else if(LanguageName == "Английский"  && regionName == "Северная Америка")
@@ -81,17 +104,23 @@ namespace League_Of_Legends
 			this.ShowInTaskbar = false; 
 		    notifyIcon1.Visible = true; 
 			lolreader.acceptConfiguration(SelectRegion(RegionCB.Text), SelectLanguage(RegionCB.Text,LanguageCB.Text));
-			System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\lol.launcher.exe");
+			try{
+			if(runAdmonCB.Checked)
+				System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\lol.launcher.admin.exe");
+			else
+				System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\lol.launcher.exe");
+			for(int i = 0; i<4; i++){
+				if(LOLProcess.IsProcessOpen(LOLProcessName))
+					break;
+				System.Threading.Thread.Sleep(1000);
+			}
+			LOLProcessTimer.Start();
+			}catch(Exception exc){ShowLauncher();}
 		}
 						
 		private void NotifyIcon1_MouseClick(Object sender, MouseEventArgs e)
 		{
-			if (this.WindowState == FormWindowState.Minimized && e.Button == MouseButtons.Left)
-		    { 
-		       this.WindowState = FormWindowState.Normal; 
-		       this.ShowInTaskbar = true; 
-		       notifyIcon1.Visible = false; 
-		    } 
+			ShowLauncher();
 		}
 		
 		private void CloseClick(object sender, EventArgs e)
@@ -111,6 +140,10 @@ namespace League_Of_Legends
 		}
 		
 		private void menuItemOpen_Click(object sender, EventArgs e){
+			ShowLauncher();
+		}
+		
+		private void ShowLauncher(){
 			if (this.WindowState == FormWindowState.Minimized)
 		    { 
 		       this.WindowState = FormWindowState.Normal; 
