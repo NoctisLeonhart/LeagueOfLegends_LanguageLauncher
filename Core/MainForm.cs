@@ -115,9 +115,7 @@ namespace League_Of_Legends
 		
 		void StartButtonClick(object sender, System.EventArgs e)
 		{
-			this.WindowState = FormWindowState.Minimized;
-			this.ShowInTaskbar = false; 
-		    notifyIcon1.Visible = true; 
+			HideLauncher();
 			lolreader.acceptConfiguration(SelectRegion(RegionCB.Text), SelectLanguage(RegionCB.Text,LanguageCB.Text));
 			try{
 			if(runAdmonCB.Checked)
@@ -145,10 +143,7 @@ namespace League_Of_Legends
 		
 		private void HideButClick(object sender, EventArgs e)
 		{
-			this.WindowState = FormWindowState.Minimized;		
-			this.ShowInTaskbar = false; 
-		    notifyIcon1.Visible = true; 
-		    HideFromAltTab(this.Handle);
+			HideLauncher();
 		}
 		
 		private void menuItemExit_Click(object sender, EventArgs e){
@@ -157,6 +152,13 @@ namespace League_Of_Legends
 		
 		private void menuItemOpen_Click(object sender, EventArgs e){
 			ShowLauncher();
+		}
+		
+		private void HideLauncher(){
+			this.WindowState = FormWindowState.Minimized;		
+			this.ShowInTaskbar = false; 
+		    notifyIcon1.Visible = true; 
+		    HideFromAltTab(this.Handle);
 		}
 		
 		private void ShowLauncher(){
