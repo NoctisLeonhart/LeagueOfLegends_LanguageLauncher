@@ -10,6 +10,7 @@ namespace League_Of_Legends
 {
 	partial class MainForm
 	{
+
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>

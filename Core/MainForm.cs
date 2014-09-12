@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 using League_Of_Legends.Core;
 
@@ -20,6 +21,16 @@ namespace League_Of_Legends
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		[DllImport("user32.dll")]
+		private static extern int SetWindowLong(IntPtr window, int index, int value);
+		
+		[DllImport("user32.dll")]
+		private static extern int GetWindowLong(IntPtr window, int index);
+		
+		private const int GWL_EXSTYLE = -20;
+		private const int WS_EX_TOOLWINDOW = 0x00000080;
+			
+				
 		private static Timer LOLProcessTimer = new Timer();
 		private LOLReader lolreader = new LOLReader();
 		private static ProcessChecker LOLProcess = new ProcessChecker();
@@ -31,7 +42,11 @@ namespace League_Of_Legends
 			InitializeComponent();
 			loadDefaultSettings();
 		}	
-		
+		public static void HideFromAltTab(IntPtr Handle)
+		{
+		    SetWindowLong(Handle, GWL_EXSTYLE, GetWindowLong(Handle, 
+			GWL_EXSTYLE) | WS_EX_TOOLWINDOW);
+		}
 		private void ThisProcessCheck(){
 			if(LOLProcess.ThisProcessIsOpen()){
 				MessageBox.Show("League Of Legends Language Launcher уже запущен, проверьте трей");
@@ -133,6 +148,7 @@ namespace League_Of_Legends
 			this.WindowState = FormWindowState.Minimized;		
 			this.ShowInTaskbar = false; 
 		    notifyIcon1.Visible = true; 
+		    HideFromAltTab(this.Handle);
 		}
 		
 		private void menuItemExit_Click(object sender, EventArgs e){
